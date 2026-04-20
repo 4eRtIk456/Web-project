@@ -1,0 +1,412 @@
+{
+  "info": {
+    "_postman_id": "c66df7ab-9657-4e30-a2b8-a1c3fee20e9b",
+    "name": "tour agency",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "53713852",
+    "_collection_link": "https://go.postman.co/collection/53713852-c66df7ab-9657-4e30-a2b8-a1c3fee20e9b?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "tour requests",
+      "item": [
+        {
+          "name": "tour detail",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzc2Njk1Njc3LCJpYXQiOjE3NzY2OTQ0NzcsImp0aSI6Ijg0Zjg0NDEyMzE2YjQyZmZhNTgyNTM4OTZjMjg5NzFkIiwidXNlcl9pZCI6IjUifQ.1A0E_ZP3wnP-DgTC0bUE1sV-YNX8G8nCuU0AZ8Oxf0k",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/tour/1",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "tour",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "list of tours",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzc2NjkyOTAyLCJpYXQiOjE3NzY2OTI2MDIsImp0aSI6ImM5Y2VlMmIyMjZiYzQyM2E4MDFiMTMzZWFhZmEyNGRjIiwidXNlcl9pZCI6IjUifQ.czCU7jhf3OncM7kh9nqoTVnwAJHFbvosAqJJ8Fa6So4",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/tours/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "tours",
+                ""
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "user/token",
+      "item": [
+        {
+          "name": "Token refresh",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"refresh\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc3Njc3ODI4OCwiaWF0IjoxNzc2NjkxODg4LCJqdGkiOiI2NGViZTNiYmVhM2Q0NjNkYjQxMTMxNTFhOGU3NzU4MCIsInVzZXJfaWQiOiI1In0.eQDzsfHNdRFEu8hhJs16u5eiVlGyE1zOZUML2CAfR00\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/token/refresh/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "token",
+                "refresh",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "user registration",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"username\": \"Zhibek\",\r\n  \"password\": \"12345678\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/registration",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "registration"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "getting token",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"username\": \"testuser\",\r\n  \"password\": \"12345678\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/token/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "token",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzc2Njk0NjkwLCJpYXQiOjE3NzY2OTM0OTAsImp0aSI6ImExOTIwOTBiNzgzMDRkMWJhOWNjMWY5YzU4ZTZlNDBmIiwidXNlcl9pZCI6IjUifQ.w7cqlb2ODnNet39UMx0uHH3N7nnfRdU7Up6YDTNE91A",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"refresh\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc3Njc3ODI4OCwiaWF0IjoxNzc2NjkxODg4LCJqdGkiOiI2NGViZTNiYmVhM2Q0NjNkYjQxMTMxNTFhOGU3NzU4MCIsInVzZXJfaWQiOiI1In0.eQDzsfHNdRFEu8hhJs16u5eiVlGyE1zOZUML2CAfR00\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/logout/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "logout",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "token checking/booking checking",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "jwt",
+              "jwt": [
+                {
+                  "key": "secret",
+                  "value": "",
+                  "type": "string"
+                },
+                {
+                  "key": "algorithm",
+                  "value": "HS256",
+                  "type": "string"
+                },
+                {
+                  "key": "isSecretBase64Encoded",
+                  "value": false,
+                  "type": "boolean"
+                },
+                {
+                  "key": "payload",
+                  "value": "{}",
+                  "type": "string"
+                },
+                {
+                  "key": "addTokenTo",
+                  "value": "header",
+                  "type": "string"
+                },
+                {
+                  "key": "headerPrefix",
+                  "value": "Bearer",
+                  "type": "string"
+                },
+                {
+                  "key": "queryParamKey",
+                  "value": "token",
+                  "type": "string"
+                },
+                {
+                  "key": "header",
+                  "value": "{}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzc2NjkyOTAyLCJpYXQiOjE3NzY2OTI2MDIsImp0aSI6ImM5Y2VlMmIyMjZiYzQyM2E4MDFiMTMzZWFhZmEyNGRjIiwidXNlcl9pZCI6IjUifQ.czCU7jhf3OncM7kh9nqoTVnwAJHFbvosAqJJ8Fa6So4",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/bookings/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "bookings",
+                ""
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "user profile",
+      "item": [
+        {
+          "name": "User profile",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzc2Njk1Njc3LCJpYXQiOjE3NzY2OTQ0NzcsImp0aSI6Ijg0Zjg0NDEyMzE2YjQyZmZhNTgyNTM4OTZjMjg5NzFkIiwidXNlcl9pZCI6IjUifQ.1A0E_ZP3wnP-DgTC0bUE1sV-YNX8G8nCuU0AZ8Oxf0k",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/profile/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "profile",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "User change(put)",
+          "request": {
+            "method": "PUT",
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "name": "User Booking to some tours",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzc2NjkyOTAyLCJpYXQiOjE3NzY2OTI2MDIsImp0aSI6ImM5Y2VlMmIyMjZiYzQyM2E4MDFiMTMzZWFhZmEyNGRjIiwidXNlcl9pZCI6IjUifQ.czCU7jhf3OncM7kh9nqoTVnwAJHFbvosAqJJ8Fa6So4",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"tour_id\": 1\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/bookings/",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "bookings",
+                ""
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
