@@ -1,0 +1,72 @@
+<div class="register-page">
+
+  <!-- LEFT -->
+  <div class="left">
+    <div class="overlay">
+      <h1>Start Your Journey!</h1>
+      <p>Create an account and explore the world with exclusive deals and personalized experiences</p>
+    </div>
+  </div>
+
+  <!-- RIGHT -->
+  <div class="right">
+
+    <div class="form-box">
+      <h2>Create Account</h2>
+      <p class="subtitle">Join thousands of happy travelers</p>
+
+      <!-- Name -->
+      <label>Full Name</label>
+      <input [(ngModel)]="name" placeholder="Your full name" />
+
+      <!-- Email -->
+      <label>Email Address</label>
+      <input [(ngModel)]="email" placeholder="your.email@example.com" />
+
+      <!-- Phone -->
+      <label>Phone Number</label>
+      <input [(ngModel)]="phone" placeholder="+7 (777) 123-45-67" />
+
+      <!-- Password -->
+      <label>Password</label>
+      <input [(ngModel)]="password" type="password" placeholder="Create a strong password" />
+
+      <!-- Confirm -->
+      <label>Confirm Password</label>
+      <input [(ngModel)]="confirmPassword" type="password" placeholder="Confirm your password" />
+
+      <!-- Terms -->
+      <div class="terms">
+        <input type="checkbox" [(ngModel)]="agree" />
+        <span>I agree to the Terms of Service and Privacy Policy</span>
+      </div>
+
+      <!-- Error -->
+      @if (error) {
+        <p class="error">{{ error }}</p>
+      }
+
+      <!-- Button -->
+      <button (click)="onRegister()" [disabled]="loading">
+        @if (!loading) { Create Account }
+        @else { Loading... }
+      </button>
+
+      <!-- Login -->
+      <p class="login">
+        Already have an account?
+        <a routerLink="/login">Sign In</a>
+      </p>
+
+      <div class="divider">Or sign up with</div>
+
+      <!-- Social -->
+      <div class="socials">
+        <button>Google</button>
+        <button>Facebook</button>
+      </div>
+
+    </div>
+
+  </div>
+</div>
