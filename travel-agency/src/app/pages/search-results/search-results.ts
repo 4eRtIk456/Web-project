@@ -4,46 +4,68 @@ import { TourService } from '../../core/services/tour.service';
 
 @Component({
   standalone: true,
-  template: `
-    <h2>Search Results</h2>
-
-    @for (tour of filteredTours; track tour.id) {
-      <div class="card">
-        <h3>{{ tour.title }}</h3>
-        <p>{{ tour.price }}</p>
-      </div>
-    }
-  `
+  templateUrl: './search-results.html',
+  styleUrls: ['./search-results.css']
 })
 export class SearchResultsComponent implements OnInit {
+
   tours: any[] = [];
   filteredTours: any[] = [];
 
-  constructor(private route: ActivatedRoute, private tourService: TourService) {}
+  loading = false;
+  error = '';
+
+  constructor(
+    private route: ActivatedRoute,
+    private tourService: TourService
+  ) {}
 
   ngOnInit() {
     const params = this.route.snapshot.queryParams;
 
-    this.tourService.searchTours(params).subscribe({
-      next: (data: any) => {
+    const from = params['from'];
+    const to = params['to'];
+    const date = params['date'];
+    const travelers = Number(params['travelers']);
+
+    const day = new Date(date).getDate();
+
+    this.loadTours(from, to, day, travelers);
+  }
+
+  loadTours(from: string, to: string, day: number, travelers: number) {
+    this.loading = true;
+
+    this.tourService.getPopularTours().subscribe({
+      next: (data: any[]) => {
         this.tours = data;
 
-        const day = Number(params['day']);
-        const travelers = Number(params['travelers']);
+        const isEven = day % 2 === 0;
 
         this.filteredTours = this.tours.filter(tour => {
-          const isEven = day % 2 === 0;
 
-          const validDate = isEven
-            ? tour.availableDates.some((d: number) => d % 2 === 0)
-            : tour.availableDates.some((d: number) => d % 2 !== 0);
+          // even / odd logic
+          const validDate = tour.availableDates.some((d: number) =>
+            isEven ? d % 2 === 0 : d % 2 !== 0
+          );
 
-          return validDate && travelers <= tour.maxPeople;
+          return (
+            tour.country.toLowerCase().includes(to.toLowerCase()) &&
+            validDate &&
+            travelers <= tour.maxPeople
+          );
         });
+
+        this.loading = false;
       },
       error: () => {
-        alert('Failed to load tours');
+        this.error = 'Failed to load search results';
+        this.loading = false;
       }
     });
+  }
+
+  book(tour: any) {
+    alert(`Booked ${tour.title}`);
   }
 }

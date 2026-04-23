@@ -4,12 +4,33 @@
     <p>International trips from Kazakhstan made easy</p>
 
     <div class="search-box">
-      <input [(ngModel)]="from" placeholder="From" />
-      <input [(ngModel)]="to" placeholder="To" />
-      <input type="date" [(ngModel)]="date" />
-      <input type="number" [(ngModel)]="travelers" min="1" />
 
-      <button (click)="search()">Find Tours</button>
+    <!-- FROM (dropdown) -->
+    <select [(ngModel)]="from">
+        @for (city of cities; track city) {
+        <option [value]="city">{{ city }}</option>
+        }
+    </select>
+
+    <!-- TO -->
+    <input [(ngModel)]="to" placeholder="Destination country" />
+
+    <!-- DATE (ENGLISH) -->
+    <input
+        type="date"
+        [(ngModel)]="date"
+        lang="en"
+    />
+
+    <!-- TRAVELERS -->
+    <input
+        type="number"
+        [(ngModel)]="travelers"
+        min="1"
+        placeholder="Travelers"
+    />
+
+    <button (click)="search()">Find Tours</button>
     </div>
 
     @if (errorMessage) {

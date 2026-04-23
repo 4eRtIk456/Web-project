@@ -5,6 +5,6 @@ export interface Tour {
   price: number;
   image: string;
   duration: string;
-  availableDates: number[]; 
   maxPeople: number;
+  availableDates: number[]; 
 }

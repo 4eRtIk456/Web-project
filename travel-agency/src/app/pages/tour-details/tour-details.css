@@ -1,0 +1,109 @@
+.hero {
+  height: 300px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.overlay {
+  background: rgba(0,0,0,0.5);
+  color: white;
+  height: 100%;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.back {
+  color: white;
+  margin-bottom: 10px;
+}
+
+.meta {
+  display: flex;
+  gap: 20px;
+  margin-top: 10px;
+}
+
+.container {
+  display: flex;
+  gap: 40px;
+  padding: 40px;
+}
+
+/* LEFT */
+.content {
+  flex: 2;
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+/* GALLERY */
+.gallery {
+  display: flex;
+  gap: 15px;
+}
+
+.gallery img {
+  width: 300px;
+  border-radius: 12px;
+}
+
+/* RIGHT */
+.booking-card {
+  flex: 1;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 5px 12px rgba(0,0,0,0.1);
+  background: white;
+  height: fit-content;
+}
+
+.price {
+  margin-bottom: 20px;
+}
+
+.old {
+  text-decoration: line-through;
+  margin-right: 10px;
+}
+
+.new {
+  font-size: 28px;
+  color: #0d9488;
+}
+
+label {
+  display: block;
+  margin-top: 10px;
+}
+
+input, select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  margin-top: 5px;
+}
+
+button {
+  width: 100%;
+  margin-top: 15px;
+  padding: 12px;
+  border-radius: 10px;
+  background: #0d9488;
+  color: white;
+}
+
+.outline {
+  background: white;
+  color: #0d9488;
+  border: 1px solid #0d9488;
+}
+
+.benefits {
+  margin-top: 15px;
+}

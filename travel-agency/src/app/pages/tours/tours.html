@@ -37,7 +37,7 @@
           <p>{{ tour.duration }}</p>
 
           <div class="actions">
-            <button (click)="viewDetails(tour)">View</button>
+            <button [routerLink]="['/tour', tour.id]">View</button>
             <button (click)="bookTour(tour)">Book</button>
           </div>
         </div>
