@@ -1,1 +1,40 @@
-<p>search-results works!</p>
+<div class="search-page">
+
+  <h1>Search Results</h1>
+
+  <!-- LOADING -->
+  @if (loading) {
+    <p>Loading...</p>
+  }
+
+  <!-- ERROR -->
+  @if (error) {
+    <p class="error">{{ error }}</p>
+  }
+
+  <!-- EMPTY -->
+  @if (!loading && filteredTours.length === 0) {
+    <p>No tours found</p>
+  }
+
+  <!-- RESULTS -->
+  <div class="grid">
+    @for (tour of filteredTours; track tour.id) {
+
+      <div class="card">
+        <img [src]="tour.image" />
+
+        <div class="card-body">
+          <h3>{{ tour.title }}</h3>
+          <p>{{ tour.country }}</p>
+          <p>${{ tour.price }}</p>
+          <p>{{ tour.duration }}</p>
+
+          <button (click)="book(tour)">Book Now</button>
+        </div>
+      </div>
+
+    }
+  </div>
+
+</div>
