@@ -1,0 +1,135 @@
+.login-page {
+  display: flex;
+  height: 100vh;
+}
+
+/* LEFT SIDE */
+.left {
+  flex: 1;
+  background: url('/assets/hero.jpg') center/cover no-repeat;
+  position: relative;
+}
+
+.left .overlay {
+  background: rgba(13, 148, 136, 0.85);
+  color: white;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.left h1 {
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
+/* RIGHT SIDE */
+.right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f8fafc;
+}
+
+.form-box {
+  width: 350px;
+}
+
+.logo {
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #0d9488;
+}
+
+h2 {
+  text-align: center;
+}
+
+.subtitle {
+  text-align: center;
+  margin-bottom: 20px;
+  color: gray;
+}
+
+label {
+  display: block;
+  margin-top: 15px;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  margin-top: 5px;
+}
+
+/* OPTIONS */
+.options {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+/* BUTTON */
+button {
+  width: 100%;
+  margin-top: 20px;
+  padding: 12px;
+  background: #0d9488;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.6;
+}
+
+/* ERROR */
+.error {
+  color: red;
+  margin-top: 10px;
+}
+
+/* REGISTER */
+.register {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.divider {
+  text-align: center;
+  margin: 20px 0;
+  color: gray;
+}
+
+/* SOCIAL */
+.socials {
+  display: flex;
+  gap: 10px;
+}
+
+.socials button {
+  background: white;
+  color: black;
+  border: 1px solid #ccc;
+}
+
+@media (max-width: 768px) {
+  .login-page {
+    flex-direction: column;
+  }
+
+  .left {
+    height: 200px;
+  }
+}

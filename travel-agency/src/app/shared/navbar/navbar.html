@@ -1,0 +1,19 @@
+<nav class="navbar">
+  <div class="logo">✈️ Pack&Go</div>
+
+  <ul class="nav-links">
+    <li><a routerLink="/">Home</a></li>
+    <li><a routerLink="/tours">Tours</a></li>
+    <li><a routerLink="/about">About</a></li>
+    <li><a routerLink="/contact">Contact</a></li>
+  </ul>
+
+  <div class="auth">
+    @if (!auth.isLoggedIn()) {
+      <a routerLink="/login">Sign In</a>
+      <button routerLink="/register">Register</button>
+    } @else {
+      <button (click)="logout()">Logout</button>
+    }
+  </div>
+</nav>

@@ -1,0 +1,49 @@
+<div class="tours-page">
+
+  <h1>Available Tours</h1>
+
+  <!-- FILTERS -->
+  <div class="filters">
+    <input [(ngModel)]="country" placeholder="Country" />
+
+    <input type="number" [(ngModel)]="maxPrice" placeholder="Max Price" />
+
+    <input type="number" [(ngModel)]="travelers" min="1" placeholder="Travelers" />
+
+    <button (click)="applyFilters()">Apply Filters</button>
+  </div>
+
+  <!-- LOADING -->
+  @if (loading) {
+    <p>Loading tours...</p>
+  }
+
+  <!-- ERROR -->
+  @if (error) {
+    <p class="error">{{ error }}</p>
+  }
+
+  <!-- CARDS -->
+  <div class="grid">
+    @for (tour of filteredTours; track tour.id) {
+      <div class="card">
+
+        <img [src]="tour.image" />
+
+        <div class="card-body">
+          <h3>{{ tour.title }}</h3>
+          <p>{{ tour.country }}</p>
+          <p class="price">${{ tour.price }}</p>
+          <p>{{ tour.duration }}</p>
+
+          <div class="actions">
+            <button (click)="viewDetails(tour)">View</button>
+            <button (click)="bookTour(tour)">Book</button>
+          </div>
+        </div>
+
+      </div>
+    }
+  </div>
+
+</div>
