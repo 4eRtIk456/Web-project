@@ -37,14 +37,11 @@ jobs:
           push: true
           appSourcePath: ${{ github.workspace }}
           dockerfilePath: Dockerfile
-          _targetLabelKey_: _targetLabel_
-          registryUrl: 
+          registryUrl: packandgo.azurecr.io
           registryUsername: ${{ secrets.PACKANDGO_REGISTRY_USERNAME }}
           registryPassword: ${{ secrets.PACKANDGO_REGISTRY_PASSWORD }}
           containerAppName: pack-and-go
           resourceGroup: web-dev
-          imageToBuild: default/[parameters('containerAppName')]:${{ github.sha }}
-          _buildArgumentsKey_: |
-            _buildArgumentsValues_
+          imageToBuild: packandgo.azurecr.io/pack-and-go:${{ github.sha }}
 
 
