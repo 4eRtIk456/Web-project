@@ -77,7 +77,11 @@
       }
     </select>
 
-    <button (click)="book()">Book Now</button>
+    @if (true) {
+      <button (click)="book()">Book Now</button>
+    } @else {
+      <button routerLink="/login">Login to Book</button>
+    }
     <button class="outline">Contact Us</button>
 
     <ul class="benefits">
