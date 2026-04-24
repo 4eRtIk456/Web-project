@@ -17,7 +17,7 @@ RUN pip install -r requirements.txt gunicorn
 
 COPY backend/ .
 
-COPY --from=build-front /app/dist/travel-agency /var/www/html
+COPY --from=build-front /app/dist/travel-agency/browser /var/www/html
 
 COPY nginx.conf /etc/nginx/sites-available/default
 
