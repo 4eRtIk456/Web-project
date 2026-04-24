@@ -1,8 +1,23 @@
 from rest_framework.decorators import api_view
-from rest_framework import status
 from rest_framework.response import Response
-from api.models import Tour
-from api.serializers import TourSerializer
+from .models import Tour
+from .serializers import TourSerializer
 
-# Create your views here.
+
+@api_view(['GET'])
+def tours(request):
+    tours = Tour.objects.all()
+    serializer = TourSerializer(tours, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def tour_detail(request, id):
+    try:
+        tour = Tour.objects.get(id=id)
+    except Tour.DoesNotExist:
+        return Response({'error': 'Not found'}, status=404)
+
+    serializer = TourSerializer(tour)
+    return Response(serializer.data)
 

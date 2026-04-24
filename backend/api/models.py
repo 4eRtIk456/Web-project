@@ -9,6 +9,8 @@ class Tour(models.Model):
     date = models.DateField()
     photo = models.ImageField(upload_to='tours/')
     duration = models.IntegerField()
+    max_people = models.IntegerField(default=5)
+    available_dates = models.JSONField(default=list) 
     def __str__(self):
         return self.title
 
