@@ -25,12 +25,15 @@ export class RegisterComponent {
   constructor(private auth: AuthService, private router: Router) {}
 
   onRegister() {
+    console.log("STEP 1");
     this.error = '';
 
     if (!this.name || !this.email || !this.password || !this.confirmPassword) {
       this.error = 'Please fill all fields';
       return;
     }
+
+    console.log("STEP 2: fields OK");
 
     if (this.password !== this.confirmPassword) {
       this.error = 'Passwords do not match';
@@ -42,6 +45,7 @@ export class RegisterComponent {
       return;
     }
 
+    console.log("STEP 3: before API call");
     this.loading = true;
 
     this.auth.register({

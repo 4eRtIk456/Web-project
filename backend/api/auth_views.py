@@ -12,12 +12,12 @@ def login_view(request):
     email = request.data.get('email')
     password = request.data.get('password')
 
-    try:
-        user = User.objects.get(email=email)
-    except User.DoesNotExist:
-        return Response({'error': 'User not found'}, status=404)
+    user_obj = User.objects.filter(email=email).first()
 
-    user = authenticate(username=user.username, password=password)
+    if not user_obj:
+        return Response({'error': 'Invalid credentials'}, status=401)
+
+    user = authenticate(username=user_obj.username, password=password)
 
     if user is None:
         return Response({'error': 'Invalid credentials'}, status=401)

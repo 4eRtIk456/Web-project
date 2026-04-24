@@ -6,12 +6,12 @@ export class AuthService {
 
   constructor(private api: ApiService) {}
 
-  login(data: any) {
-    return this.api.post('auth/login/', data);
+  register(data: any) {
+    return this.api.post('register/', data);
   }
 
-  register(data: any) {
-    return this.api.post('auth/register/', data);
+  login(data: any) {
+    return this.api.post('auth/login/', data);
   }
 
   saveToken(token: string) {
@@ -23,6 +23,7 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
+    if (typeof window === 'undefined') return false;
     return !!localStorage.getItem('token');
   }
 }

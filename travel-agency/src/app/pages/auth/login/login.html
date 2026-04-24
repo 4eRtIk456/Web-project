@@ -42,8 +42,7 @@
 
       <!-- Button -->
       <button (click)="onLogin()" [disabled]="loading">
-        @if (!loading) { Sign In }
-        @else { Loading... }
+        {{ loading ? 'Loading...' : 'Sign In' }}
       </button>
 
       <!-- Register -->
