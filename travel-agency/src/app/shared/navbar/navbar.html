@@ -1,19 +1,51 @@
 <nav class="navbar">
-  <div class="logo">✈️ Pack&Go</div>
 
-  <ul class="nav-links">
-    <li><a routerLink="/">Home</a></li>
-    <li><a routerLink="/tours">Tours</a></li>
-    <li><a routerLink="/about">About</a></li>
-    <li><a routerLink="/contact">Contact</a></li>
-  </ul>
-
-  <div class="auth">
-    @if (!auth.isLoggedIn()) {
-      <a routerLink="/login">Sign In</a>
-      <button routerLink="/register">Register</button>
-    } @else {
-      <button (click)="logout()">Logout</button>
-    }
+  <!-- LOGO -->
+  <div class="logo">
+    <img src="assets/logo.png" alt="logo">
+    <span>Pack&Go</span>
   </div>
+
+  <!-- DESKTOP LINKS -->
+  <div class="nav-links desktop">
+    <a href="#top">Home</a>
+    <a routerLink="/tours">Tours</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </div>
+
+  <!-- AUTH -->
+  <div class="auth desktop">
+    <a routerLink="/login" class="signin">
+      ➜ Sign In
+    </a>
+    <a routerLink="/register" class="register">
+      👤 Register
+    </a>
+  </div>
+
+  <!-- 🍔 BURGER -->
+  <div class="burger" (click)="toggleMenu()">
+    ☰
+  </div>
+
 </nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" [class.open]="isOpen">
+
+  <a routerLink="/" (click)="closeMenu()">Home</a>
+  <a routerLink="/tours" (click)="closeMenu()">Tours</a>
+  <a routerLink="/about" (click)="closeMenu()">About</a>
+  <a routerLink="/contact" (click)="closeMenu()">Contact</a>
+
+  <hr>
+
+  <a routerLink="/login" (click)="closeMenu()">Sign In</a>
+  <a routerLink="/register" (click)="closeMenu()">Register</a>
+
+</div>
+
+@if (isOpen) {
+  <div class="overlay" (click)="closeMenu()"></div>
+}

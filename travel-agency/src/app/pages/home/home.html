@@ -1,37 +1,63 @@
+<div id="top"></div>
 <section class="hero">
   <div class="overlay">
-    <h1>Explore the World with Pack&Go</h1>
+    <h1>
+      Explore the World with<br>
+      <span>Pack&Go</span>
+    </h1>
+
     <p>International trips from Kazakhstan made easy</p>
 
-    <div class="search-box">
+  <div class="search-box">
 
-    <!-- FROM (dropdown) -->
-    <select [(ngModel)]="from">
-        @for (city of cities; track city) {
-        <option [value]="city">{{ city }}</option>
-        }
-    </select>
+    <div class="fields">
 
-    <!-- TO -->
-    <input [(ngModel)]="to" placeholder="Destination country" />
+      <!-- FROM -->
+      <div class="field">
+        <label>From</label>
+        <div class="input">
+          <span class="icon-search">📍</span>
+          <select [(ngModel)]="from">
+            <option>Almaty</option>
+            <option>Astana</option>
+            <option>Shymkent</option>
+          </select>
+        </div>
+      </div>
 
-    <!-- DATE (ENGLISH) -->
-    <input
-        type="date"
-        [(ngModel)]="date"
-        lang="en"
-    />
+      <!-- TO -->
+      <div class="field">
+        <label>To</label>
+        <div class="input">
+          <input type="text" placeholder="Any country" [(ngModel)]="to">
+        </div>
+      </div>
 
-    <!-- TRAVELERS -->
-    <input
-        type="number"
-        [(ngModel)]="travelers"
-        min="1"
-        placeholder="Travelers"
-    />
+      <!-- DATE -->
+      <div class="field">
+        <label>Date</label>
+        <div class="input">
+          <span class="icon-search">📅</span>
+          <input type="date" [(ngModel)]="date">
+        </div>
+      </div>
 
-    <button (click)="search()">Find Tours</button>
+      <!-- TRAVELERS -->
+      <div class="field">
+        <label>Travelers</label>
+        <div class="input">
+          <input type="number" [(ngModel)]="travelers" min="1">
+        </div>
+      </div>
+
     </div>
+
+    <!-- BUTTON -->
+    <button class="search-btn" (click)="search()">
+      🔍 Find Tours
+    </button>
+
+</div>
 
     @if (errorMessage) {
       <p class="error">{{ errorMessage }}</p>
@@ -39,88 +65,281 @@
   </div>
 </section>
 
-<section class="section">
+<section class="destinations">
+
   <h2>Popular Destinations</h2>
-  <p>Discover amazing places around the world</p>
+  <p class="subtitle">
+    Discover amazing places around the world with our curated travel packages
+  </p>
 
-  <div class="grid">
-    @for (d of destinations; track d.name) {
+  <div class="cards">
+
+    @for (tour of tours; track tour.id) {
+
       <div class="card">
-        <img [src]="d.image" />
-        <div class="card-body">
-          <h3>{{ d.name }}</h3>
-          <p>{{ d.desc }}</p>
-          <span>from ${{ d.price }}</span>
+
+        <!-- IMAGE -->
+        <div class="image">
+          <img [src]="tour.photo" alt="">
+          <div class="overlay-title">
+            {{ tour.country }}
+          </div>
         </div>
-      </div>
-    }
-  </div>
-</section>
 
-<section class="section light">
-  <h2>Why Choose Pack&Go?</h2>
-
-  <div class="features">
-    <div>
-      <h3>Best Prices</h3>
-      <p>Competitive deals</p>
-    </div>
-
-    <div>
-      <h3>Trusted Agency</h3>
-      <p>Verified services</p>
-    </div>
-
-    <div>
-      <h3>Easy Booking</h3>
-      <p>Fast & simple</p>
-    </div>
-
-    <div>
-      <h3>24/7 Support</h3>
-      <p>Always available</p>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <h2>Special Offers</h2>
-
-  <div class="grid">
-    @for (o of offers; track o.title) {
-      <div class="offer-card">
-        <img [src]="o.image" />
-
-        <div class="badge">-{{ o.discount }}%</div>
-
-        <div class="card-body">
-          <h3>{{ o.title }}</h3>
-          <p class="price">
-            <span class="old">${{ o.old }}</span>
-            ${{ o.price }}
+        <!-- CONTENT -->
+        <div class="content">
+          <p class="desc">
+            {{ getShortDescription(tour.description) }}
           </p>
 
-          <button>Book Now</button>
+          <div class="bottom">
+            <span class="price">from ${{ tour.price }}</span>
+
+            <a [routerLink]="['/tour', tour.id]" class="details">
+              View details →
+            </a>
+          </div>
         </div>
+
       </div>
+
     }
+
   </div>
+
 </section>
 
-<section class="section">
-  <h2>What Our Customers Say</h2>
+<section id="about" class="why">
 
-  <div class="grid">
-    <div class="card">
-      <p>Amazing experience in Turkey!</p>
-    </div>
+  <h2>Why Choose Pack&Go?</h2>
+  <p class="subtitle">
+    Your trusted travel partner for unforgettable international experiences
+  </p>
 
-    <div class="card">
-      <p>Best travel agency ever.</p>
-    </div>
+  <div class="features">
 
-    <div class="card">
-      <p>Support was incredible.</p>
-    </div>
+    @for (feature of features; track feature.title) {
+
+      <div class="feature-card">
+
+        <div class="icon-box">
+
+          <!-- ICONS -->
+          @if (feature.icon === 'dollar') {
+            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+              <path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7H14a3.5 3.5 0 0 1 0 7H6"/>
+            </svg>
+          }
+
+          @if (feature.icon === 'shield') {
+            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+              <path d="M12 2l7 4v6c0 5-3.5 8-7 10-3.5-2-7-5-7-10V6l7-4z"/>
+            </svg>
+          }
+
+          @if (feature.icon === 'click') {
+            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+              <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4"/>
+            </svg>
+          }
+
+          @if (feature.icon === 'support') {
+            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+              <path d="M3 18v-6a9 9 0 0 1 18 0v6"/>
+              <path d="M21 18a3 3 0 0 1-3 3h-1"/>
+            </svg>
+          }
+
+        </div>
+
+        <h3>{{ feature.title }}</h3>
+        <p>{{ feature.description }}</p>
+
+      </div>
+
+    }
+
   </div>
+
+</section>
+
+<section class="offers">
+
+  <!-- HEADER -->
+  <div class="offers-header">
+
+    <div class="badge">
+      🔖 Hot Deals
+    </div>
+
+    <h2>Special Offers</h2>
+
+    <p>
+      Limited time offers on popular destinations - book now and save big!
+    </p>
+
+  </div>
+
+  <!-- CARDS -->
+  <div class="offers-grid">
+
+    @for (offer of offers; track offer.id) {
+
+      <div class="offer-card">
+
+        <!-- IMAGE -->
+        <div class="offer-image">
+          <img [src]="offer.image" [alt]="offer.title">
+
+          <div class="discount">
+            {{ offer.discount }}
+          </div>
+        </div>
+
+        <!-- CONTENT -->
+        <div class="offer-content">
+
+          <h3>{{ offer.title }}</h3>
+
+          <p class="destination">{{ offer.destination }}</p>
+
+          <div class="days">
+            ⏱ {{ offer.days }}
+          </div>
+
+          <div class="bottom">
+
+            <div class="price">
+              <span class="old">${{ offer.originalPrice }}</span>
+              <span class="new">${{ offer.salePrice }}</span>
+            </div>
+
+            <button class="book-btn"
+                    [routerLink]="['/tour', offer.id]">
+              Book Now
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    }
+
+  </div>
+
+</section>
+
+<section class="how">
+
+  <!-- HEADER -->
+  <div class="how-header">
+    <h2>How It Works</h2>
+    <p>Three simple steps to your dream vacation</p>
+  </div>
+
+  <!-- STEPS -->
+  <div class="steps">
+
+    @for (step of steps; let i = $index; track step.step) {
+
+      <div class="step">
+
+        <!-- LINE (между шагами) -->
+        @if (i < steps.length - 1) {
+          <div class="line"></div>
+        }
+
+        <div class="icon-wrapper">
+
+          <!-- ICON -->
+          <div class="icon">
+
+            @if (step.icon === 'search') {
+              <svg viewBox="0 0 24 24" stroke="white" fill="none" stroke-width="2">
+                <circle cx="11" cy="11" r="8"/>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              </svg>
+            }
+
+            @if (step.icon === 'card') {
+              <svg viewBox="0 0 24 24" stroke="white" fill="none" stroke-width="2">
+                <rect x="2" y="5" width="20" height="14" rx="2"/>
+                <line x1="2" y1="10" x2="22" y2="10"/>
+              </svg>
+            }
+
+            @if (step.icon === 'plane') {
+              <svg viewBox="0 0 24 24" stroke="white" fill="none" stroke-width="2">
+                <path d="M2 16l20-8-8 20-2-8-10-4z"/>
+              </svg>
+            }
+
+          </div>
+
+          <!-- STEP NUMBER -->
+          <div class="step-number">
+            {{ step.step }}
+          </div>
+
+        </div>
+
+        <h3>{{ step.title }}</h3>
+        <p>{{ step.description }}</p>
+
+      </div>
+
+    }
+
+  </div>
+
+</section>
+
+<section class="testimonials">
+
+  <div class="testimonials-header">
+    <h2>What Our Customers Say</h2>
+    <p>
+      Join thousands of happy travelers who trusted Pack&Go for their adventures
+    </p>
+  </div>
+
+  <div class="testimonials-grid">
+
+    @for (t of testimonials; track t.name) {
+
+      <div class="testimonial-card">
+
+        <div class="quote">“</div>
+
+        <div class="user">
+
+          <img [src]="t.avatar" [alt]="t.name">
+
+          <div>
+            <h4>{{ t.name }}</h4>
+            <p>{{ t.location }}</p>
+          </div>
+
+        </div>
+
+        <div class="stars">
+
+        @for (star of getStars(t.rating); let i = $index; track i) {
+          <span>★</span>
+        }
+
+        </div>
+
+        <p class="text">
+          {{ t.text }}
+        </p>
+
+      </div>
+
+    }
+
+  </div>
+
 </section>

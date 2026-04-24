@@ -1,72 +1,99 @@
 <div class="register-page">
-
-  <!-- LEFT -->
+  <!-- LEFT SIDE -->
   <div class="left">
     <div class="overlay">
       <h1>Start Your Journey!</h1>
-      <p>Create an account and explore the world with exclusive deals and personalized experiences</p>
+      <p>
+        Create an account and explore the world with exclusive deals and
+        personalized experiences
+      </p>
     </div>
   </div>
 
-  <!-- RIGHT -->
+  <!-- RIGHT SIDE -->
   <div class="right">
+    <div class="form-container">
 
-    <div class="form-box">
+      <!-- LOGO -->
+      <div class="logo">
+          <img src="assets/logo.png" alt="logo">
+          <span>Pack&Go</span>
+      </div>
+
       <h2>Create Account</h2>
       <p class="subtitle">Join thousands of happy travelers</p>
 
-      <!-- Name -->
-      <label>Full Name</label>
-      <input [(ngModel)]="name" placeholder="Your full name" />
+      <form (ngSubmit)="onRegister()">
 
-      <!-- Email -->
-      <label>Email Address</label>
-      <input [(ngModel)]="email" placeholder="your.email@example.com" />
+        <!-- FULL NAME -->
+        <div class="input-group">
+          <label>Full Name</label>
+          <div class="input">
+            <i class="icon">👤</i>
+            <input type="text" placeholder="Your full name" [(ngModel)]="name" name="name" />
+          </div>
+        </div>
 
-      <!-- Phone -->
-      <label>Phone Number</label>
-      <input [(ngModel)]="phone" placeholder="+7 (777) 123-45-67" />
+        <!-- EMAIL -->
+        <div class="input-group">
+          <label>Email Address</label>
+          <div class="input">
+            <i class="icon">✉️</i>
+            <input type="email" placeholder="your.email@example.com" [(ngModel)]="email" name="email" />
+          </div>
+        </div>
 
-      <!-- Password -->
-      <label>Password</label>
-      <input [(ngModel)]="password" type="password" placeholder="Create a strong password" />
+        <!-- PHONE -->
+        <div class="input-group">
+          <label>Phone Number</label>
+          <div class="input">
+            <i class="icon">📞</i>
+            <input type="text" placeholder="+7 (777) 123-45-67" [(ngModel)]="phone" name="phone" />
+          </div>
+        </div>
 
-      <!-- Confirm -->
-      <label>Confirm Password</label>
-      <input [(ngModel)]="confirmPassword" type="password" placeholder="Confirm your password" />
+        <!-- PASSWORD -->
+        <div class="input-group">
+          <label>Password</label>
+          <div class="input">
+            <i class="icon">🔒</i>
+            <input type="password" placeholder="Create a strong password" [(ngModel)]="password" name="password" />
+          </div>
+        </div>
 
-      <!-- Terms -->
-      <div class="terms">
-        <input type="checkbox" [(ngModel)]="agree" />
-        <span>I agree to the Terms of Service and Privacy Policy</span>
-      </div>
+        <!-- CONFIRM -->
+        <div class="input-group">
+          <label>Confirm Password</label>
+          <div class="input">
+            <i class="icon">🔒</i>
+            <input type="password" placeholder="Confirm your password" [(ngModel)]="confirmPassword" name="confirmPassword" />
+          </div>
+        </div>
 
-      <!-- Error -->
-      @if (error) {
-        <p class="error">{{ error }}</p>
-      }
+        <!-- CHECKBOX -->
+        <div class="checkbox">
+          <input type="checkbox" [(ngModel)]="agree" name="agree" />
+          <span>
+            I agree to the
+            <a href="#">Terms of Service</a>
+            and
+            <a href="#">Privacy Policy</a>
+          </span>
+        </div>
 
-      <!-- Button -->
-      <button (click)="onRegister()" [disabled]="loading">
-        @if (!loading) { Create Account }
-        @else { Loading... }
-      </button>
+        <!-- BUTTON -->
+        <button type="submit" class="btn">
+          ➕ Create Account
+        </button>
 
-      <!-- Login -->
-      <p class="login">
+      </form>
+
+      <!-- LINK -->
+      <p class="login-link">
         Already have an account?
         <a routerLink="/login">Sign In</a>
       </p>
 
-      <div class="divider">Or sign up with</div>
-
-      <!-- Social -->
-      <div class="socials">
-        <button>Google</button>
-        <button>Facebook</button>
-      </div>
-
     </div>
-
   </div>
 </div>
