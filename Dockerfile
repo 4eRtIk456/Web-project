@@ -1,17 +1,28 @@
-# 1 step
-FROM node:22-alpine AS build
+# --- STEP 1: Angular ---
+FROM node:22-alpine AS build-front
 WORKDIR /app
 COPY travel-agency/package*.json ./
 RUN npm install
-COPY travel-agency/ ./
+COPY travel-agency/ .
 RUN npm run build
 
+# --- STEP 2: Django ---
+FROM python:3.12-slim
+WORKDIR /app
 
-# 2 step 
-FROM nginx:alpine
-# COPY index.html /usr/share/nginx/html/index.html
-# COPY --from=build /app/dist/portfolio-os /usr/share/nginx/html
-COPY --from=build /app/dist/travel-agency/browser /usr/share/nginx/html
+RUN apt-get update && apt-get install -y nginx && rm -rf /var/lib/apt/lists/*
 
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+COPY backend/requirements.txt .
+RUN pip install -r requirements.txt gunicorn
+
+COPY backend/ .
+
+COPY --from=build-front /app/dist/travel-agency /var/www/html
+
+COPY nginx.conf /etc/nginx/sites-available/default
+
+COPY entrypoint.sh .
+RUN chmod +x entrypoint.sh
+
+EXPOSE 80 8000
+CMD ["./entrypoint.sh"]
