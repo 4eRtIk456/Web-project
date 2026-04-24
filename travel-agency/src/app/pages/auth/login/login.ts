@@ -37,7 +37,7 @@ export class LoginComponent {
         this.auth.saveToken(res.token);
         this.router.navigate(['/']);
       },
-      error: (err) => {
+      error: () => {
         this.error = 'Invalid email or password';
         this.loading = false;
       }

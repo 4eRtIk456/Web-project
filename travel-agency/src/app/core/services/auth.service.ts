@@ -11,15 +11,11 @@ export class AuthService {
   }
 
   register(data: any) {
-    return this.api.post('register/', data);
+    return this.api.post('auth/register/', data);
   }
 
   saveToken(token: string) {
     localStorage.setItem('token', token);
-  }
-
-  getToken() {
-    return localStorage.getItem('token');
   }
 
   logout() {
@@ -27,6 +23,6 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
-    return !!this.getToken();
+    return !!localStorage.getItem('token');
   }
 }

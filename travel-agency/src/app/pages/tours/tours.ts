@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TourService } from '../../core/services/tour.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, RouterModule],
   templateUrl: './tours.html',
   styleUrls: ['./tours.css']
 })
