@@ -1,0 +1,55 @@
+<div class="profile-page">
+
+  <!-- HEADER -->
+  <div class="profile-header">
+
+    <div class="avatar">
+      {{ getInitial() }}
+    </div>
+
+    <div class="user-info">
+      <h2>{{ user.username }}</h2>
+      <p>{{ user.email }}</p>
+    </div>
+
+  </div>
+
+  <!-- INFO CARDS -->
+  <div class="profile-cards">
+
+    <div class="card">
+      <h3>Account Info</h3>
+      <p><strong>Name:</strong> {{ user.username }}</p>
+      <p><strong>Email:</strong> {{ user.email }}</p>
+    </div>
+
+    <div class="card">
+      <h3>Stats</h3>
+      <p><strong>Bookings:</strong> {{ bookings.length }}</p>
+      <p><strong>Status:</strong> Active</p>
+    </div>
+
+  </div>
+
+  <!-- BOOKINGS -->
+  <div class="bookings">
+    <h2>My Bookings</h2>
+
+    @for (b of bookings; track b.id) {
+
+      <div class="booking-card">
+
+        <img 
+          [src]="b.tour_photo_url || ('http://localhost:8000' + b.tour_image)"
+        />
+
+        <div>
+          <h4>{{ b.tour_title }}</h4>
+          <p>${{ b.tour_price }}</p>
+        </div>
+
+      </div>
+
+    }
+  </div>
+

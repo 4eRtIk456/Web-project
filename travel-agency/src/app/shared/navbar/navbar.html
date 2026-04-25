@@ -1,19 +1,80 @@
 <nav class="navbar">
-  <div class="logo">✈️ Pack&Go</div>
 
-  <ul class="nav-links">
-    <li><a routerLink="/">Home</a></li>
-    <li><a routerLink="/tours">Tours</a></li>
-    <li><a routerLink="/about">About</a></li>
-    <li><a routerLink="/contact">Contact</a></li>
-  </ul>
-
-  <div class="auth">
-    @if (!auth.isLoggedIn()) {
-      <a routerLink="/login">Sign In</a>
-      <button routerLink="/register">Register</button>
-    } @else {
-      <button (click)="logout()">Logout</button>
-    }
+  <!-- LOGO -->
+  <div class="logo">
+    <img src="assets/logo.png" alt="logo">
+    <span>Pack&Go</span>
   </div>
+
+  <!-- LINKS -->
+  <div class="nav-links desktop">
+    <a href="#top">Home</a>
+    <a routerLink="/tours">Tours</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </div>
+
+  <!-- AUTH -->
+  <div class="auth desktop">
+    @if (auth.isLoggedIn()) {
+
+      <div class="user-menu">
+
+        <div class="user-btn" (click)="toggleDropdown()">
+
+          <div class="avatar">
+            {{ auth.getUserInitial() }}
+          </div>
+
+          <span class="username">
+            {{ auth.getUsername() }}
+          </span>
+
+        </div>
+
+        @if (isDropdownOpen) {
+          <div class="dropdown">
+            <a routerLink="/profile" (click)="isDropdownOpen = false">
+              Profile
+            </a>
+            <button (click)="logout()">Logout</button>
+          </div>
+        }
+
+      </div>
+
+    } @else {
+      <a routerLink="/login" class="signin">
+        ➜ Sign In
+      </a>
+      <a routerLink="/register" class="register">
+        👤 Register
+      </a>
+    }
+  </div> <!-- ✅ ВОТ ЭТОГО НЕ ХВАТАЛО -->
+
+  <!-- 🍔 BURGER -->
+  <div class="burger" (click)="toggleMenu()">
+    ☰
+  </div>
+
 </nav>
+
+<!-- MOBILE MENU (вынеси ВНЕ navbar) -->
+<div class="mobile-menu" [class.open]="isMenuOpen">
+
+  <a routerLink="/" (click)="closeMenu()">Home</a>
+  <a routerLink="/tours" (click)="closeMenu()">Tours</a>
+  <a href="#about" (click)="closeMenu()">About</a>
+  <a href="#contact" (click)="closeMenu()">Contact</a>
+
+  <hr>
+
+  <a routerLink="/login" (click)="closeMenu()">Sign In</a>
+  <a routerLink="/register" (click)="closeMenu()">Register</a>
+
+</div>
+
+@if (isMenuOpen) {
+  <div class="overlay" (click)="closeMenu()"></div>
+}

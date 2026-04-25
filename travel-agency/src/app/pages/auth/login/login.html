@@ -1,6 +1,6 @@
-<div class="login-page">
+<div class="login">
 
-  <!-- LEFT SIDE -->
+  <!-- LEFT -->
   <div class="left">
     <div class="overlay">
       <h1>Welcome Back!</h1>
@@ -8,58 +8,69 @@
     </div>
   </div>
 
-  <!-- RIGHT SIDE -->
+  <!-- RIGHT -->
   <div class="right">
 
-    <div class="form-box">
-      <div class="logo">✈️ Pack&Go</div>
+    <div class="card">
+
+      <!-- LOGO -->
+      <a class="logo">
+        <div class="logo">
+          <img src="assets/logo.png" alt="logo">
+          <span>Pack&Go</span>
+        </div>
+      </a>
 
       <h2>Sign In</h2>
       <p class="subtitle">Enter your credentials to access your account</p>
 
-      <!-- Email -->
-      <label>Email Address</label>
-      <input [(ngModel)]="email" placeholder="your.email@example.com" />
+      <form (ngSubmit)="onLogin()">
 
-      <!-- Password -->
-      <label>Password</label>
-      <input [(ngModel)]="password" type="password" placeholder="Enter your password" />
+        <!-- EMAIL -->
+        <div class="input">
+          <span class="icon">📧</span>
+          <input
+            type="email"
+            placeholder="your.email@example.com"
+            [(ngModel)]="email"
+            name="email"
+            required
+          >
+        </div>
 
-      <!-- Options -->
-      <div class="options">
-        <label>
-          <input type="checkbox" [(ngModel)]="remember" />
-          Remember me
-        </label>
+        <!-- PASSWORD -->
+        <div class="input">
+          <span class="icon">🔒</span>
+          <input
+            type="password"
+            placeholder="Enter your password"
+            [(ngModel)]="password"
+            name="password"
+            required
+          >
+        </div>
 
-        <a href="#">Forgot password?</a>
-      </div>
+        <!-- OPTIONS -->
+        <div class="options">
+          <label class="remember">
+            <input
+              type="checkbox"
+              [(ngModel)]="remember"
+              name="rememberMe"
+            >
+            Remember me
+          </label>
 
-      <!-- Error -->
-      @if (error) {
-        <p class="error">{{ error }}</p>
-      }
+          <a href="#">Forgot password?</a>
+        </div>
 
       <!-- Button -->
-      <button (click)="onLogin()" [disabled]="loading">
-        @if (!loading) { Sign In }
-        @else { Loading... }
+      <button type = "submit" [disabled]="loading" class="btn">
+        {{ loading ? 'Loading...' : '➜ Sign In' }}
       </button>
 
-      <!-- Register -->
       <p class="register">
         Don't have an account?
         <a routerLink="/register">Create Account</a>
       </p>
 
-      <div class="divider">Or continue with</div>
-
-      <div class="socials">
-        <button class="google">Google</button>
-        <button class="facebook">Facebook</button>
-      </div>
-
-    </div>
-
-  </div>
-</div>

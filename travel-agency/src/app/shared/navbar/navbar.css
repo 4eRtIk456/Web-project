@@ -1,27 +1,293 @@
 .navbar {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 15px 40px;
   background: white;
-  align-items: center;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  border-bottom: 1px solid #e5e7eb;
 }
 
+/* LOGO */
 .logo {
-  font-weight: bold;
-  font-size: 20px;
-  color: teal;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 26px;
+  font-weight: 600;
+  background: linear-gradient(to right, #007073, orange);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
+.logo img {
+  width: 35px;
+}
+
+/* LINKS */
 .nav-links {
   display: flex;
-  gap: 20px;
-  list-style: none;
+  gap: 25px;
 }
 
-.auth button {
-  background: teal;
+.nav-links a {
+  text-decoration: none;
+  color: #374151;
+  font-weight: 500;
+  transition: 0.3s;
+  position: relative;
+}
+
+/* 🔥 HOVER EFFECT */
+.nav-links a:hover {
+  color: #0d9488;
+}
+
+/* underline animation */
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0%;
+  height: 2px;
+  background: #0d9488;
+  transition: 0.3s;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* ACTIVE LINK */
+.active {
+  color: #0d9488;
+}
+
+/* AUTH */
+.auth {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* SIGN IN */
+.signin {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #0d9488;
+  font-weight: 500;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.signin:hover {
+  color: #0f766e;
+}
+
+.register {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #0d9488;
   color: white;
   padding: 8px 16px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.register:hover {
+  background: #0f766e;
+}
+
+.icon {
+  font-size: 14px;
+}
+
+.navbar {
+  position: sticky;
+  top: 0;
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+}
+
+/* BURGER */
+.burger {
+  display: none;
+  font-size: 26px;
+  cursor: pointer;
+}
+
+/* MOBILE MENU */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 250px;
+  height: 100vh;
+  background: white;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  transition: 0.3s;
+  z-index: 1001;
+}
+
+.mobile-menu.open {
+  right: 0;
+}
+
+.mobile-menu a {
+  text-decoration: none;
+  color: #1e293b;
+  font-size: 18px;
+}
+
+/* OVERLAY */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+  z-index: 1000;
+}
+
+.user-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #e6f5f5;
+  padding: 6px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  color: #007073;
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+.user-btn:hover {
+  background: #d1f0f0;
+}
+
+/* 🔥 AVATAR */
+.avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #00a0a4, #007073);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* username */
+.username {
+  font-size: 14px;
+}
+
+.user-menu {
+  position: relative;
+}
+
+.dropdown {
+  position: absolute;
+  overflow: hidden;
+  right: 0;
+  top: 45px;
+
+  min-width: 160px;
+  background: white;
+  border-radius: 12px;
+
+  padding: 6px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+
+  z-index: 2000;
+
+  opacity: 0;
+  transform: translateY(-5px) scale(0.98);
+  animation: dropdownShow 0.2s ease forwards;
+}
+
+.dropdown a,
+.dropdown button {
+  display: block;
+  width: 100%;
+
+  padding: 10px 12px;
   border-radius: 8px;
+
+  text-align: left;
+  font-size: 14px;
+
+  border: none;
+  background: none;
+  cursor: pointer;
+
+  color: #1f2937;
+  text-decoration: none;
+
+  transition: 0.2s;
+}
+
+/* hover */
+.dropdown a:hover,
+.dropdown button:hover {
+  background: #f1f5f9;
+}
+
+/* logout цвет */
+.dropdown button {
+  color: #dc2626;
+}
+
+/* разделение визуальное (без div) */
+.dropdown button {
+  margin-top: 4px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.dropdown::before {
+  content: "";
+  position: absolute;
+  top: -6px;
+  right: 15px;
+
+  width: 10px;
+  height: 10px;
+
+  background: white;
+  transform: rotate(45deg);
+
+  box-shadow: -2px -2px 5px rgba(0,0,0,0.03);
+}
+
+@keyframes dropdownShow {
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* 📱 RESPONSIVE */
+@media (max-width: 900px) {
+
+  .desktop {
+    display: none;
+  }
+
+  .burger {
+    display: block;
+  }
+
 }

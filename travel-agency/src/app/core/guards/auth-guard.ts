@@ -4,12 +4,15 @@ import { CanActivateFn, Router } from '@angular/router';
 export const authGuard: CanActivateFn = () => {
   const router = inject(Router);
 
-  const token = localStorage.getItem('token');
+  const token =
+    localStorage.getItem('token') ||
+    sessionStorage.getItem('token');
 
   if (token) {
     return true;
   }
 
-  // если не залогинен → редирект
-  return router.createUrlTree(['/login']);
+  return router.createUrlTree(['/login'], {
+    queryParams: { returnUrl: '/profile' }
+  });
 };

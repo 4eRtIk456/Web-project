@@ -7,5 +7,6 @@ export const routes: Routes = [
   { path: 'tours', loadComponent: () => import('./pages/tours/tours').then(m => m.ToursComponent) },
   { path: 'login', loadComponent: () => import('./pages/auth/login/login').then(m => m.LoginComponent) },
   { path: 'register', loadComponent: () => import('./pages/auth/register/register').then(m => m.RegisterComponent) },
-  { path: 'search', loadComponent: () => import('./pages/search-results/search-results').then(m => m.SearchResultsComponent) }
+  { path: 'search', loadComponent: () => import('./pages/search-results/search-results').then(m => m.SearchResultsComponent) },
+  { path: 'profile', canActivate: [authGuard], loadComponent: () => import('./pages/profile/profile').then(m => m.ProfileComponent)},
 ];

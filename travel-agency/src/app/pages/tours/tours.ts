@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { TourService } from '../../core/services/tour.service';
+import { ApiService } from '../../core/services/api.service';
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -16,30 +16,21 @@ export class ToursComponent implements OnInit {
 
   // filters
   country = '';
-  maxPrice = 2000;
+  maxPrice = 5000;
   travelers = 1;
 
   error = '';
-  loading = false;
 
-  constructor(private tourService: TourService) {}
+  constructor(private api: ApiService) {}
 
   ngOnInit() {
-    this.loadTours();
-  }
-
-  loadTours() {
-    this.loading = true;
-
-    this.tourService.getPopularTours().subscribe({
+    this.api.get('tours/').subscribe({
       next: (data: any) => {
         this.tours = data;
         this.filteredTours = data;
-        this.loading = false;
       },
       error: () => {
         this.error = 'Failed to load tours';
-        this.loading = false;
       }
     });
   }
@@ -49,16 +40,9 @@ export class ToursComponent implements OnInit {
       return (
         (!this.country || tour.country.toLowerCase().includes(this.country.toLowerCase())) &&
         tour.price <= this.maxPrice &&
-        this.travelers <= tour.maxPeople
+        this.travelers <= tour.max_people
       );
     });
   }
 
-  viewDetails(tour: any) {
-    alert(`Viewing ${tour.title}`);
-  }
-
-  bookTour(tour: any) {
-    alert(`Booking ${tour.title}`);
-  }
 }

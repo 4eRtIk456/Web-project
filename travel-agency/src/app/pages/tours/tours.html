@@ -13,11 +13,6 @@
     <button (click)="applyFilters()">Apply Filters</button>
   </div>
 
-  <!-- LOADING -->
-  @if (loading) {
-    <p>Loading tours...</p>
-  }
-
   <!-- ERROR -->
   @if (error) {
     <p class="error">{{ error }}</p>
@@ -25,25 +20,37 @@
 
   <!-- CARDS -->
   <div class="grid">
+
     @for (tour of filteredTours; track tour.id) {
+
       <div class="card">
 
-        <img [src]="tour.image" />
+        <!-- IMAGE -->
+        <img
+          [src]="tour.photo_url || ('http://localhost:8000' + tour.photo)"
+        />
 
+        <!-- CONTENT -->
         <div class="card-body">
-          <h3>{{ tour.title }}</h3>
-          <p>{{ tour.country }}</p>
-          <p class="price">${{ tour.price }}</p>
-          <p>{{ tour.duration }}</p>
 
-          <div class="actions">
-            <button [routerLink]="['/tour', tour.id]">View</button>
-            <button (click)="bookTour(tour)">Book</button>
-          </div>
+          <h3>{{ tour.title }}</h3>
+
+          <p>📍 {{ tour.country }}</p>
+
+          <p>⏱ {{ tour.duration }} days</p>
+
+          <p class="price">${{ tour.price }}</p>
+
+          <button [routerLink]="['/tour', tour.id]">
+            View Details →
+          </button>
+
         </div>
 
       </div>
+
     }
+
   </div>
 
 </div>

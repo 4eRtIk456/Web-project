@@ -7,30 +7,38 @@ from rest_framework.permissions import IsAuthenticated
 from .serializers import BookingSerializer, ReviewSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
 
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from .models import Booking, Tour
+from .serializers import BookingSerializer
+
 class BookingAPIView(APIView):
     permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        bookings = Booking.objects.filter(user=request.user)
+        serializer = BookingSerializer(bookings, many=True)
+        return Response(serializer.data)
+
     def post(self, request):
-        user = request.user
-        tour_id = request.data.get('tour_id')
+        tour_id = request.data.get('tour')
+
+        if not tour_id:
+            return Response({'error': 'Tour ID required'}, status=400)
 
         try:
             tour = Tour.objects.get(id=tour_id)
-        except Exception as e:
-            return Response({'error': str(e)}, status=status.HTTP_404_NOT_FOUND)
+        except Tour.DoesNotExist:
+            return Response({'error': 'Tour not found'}, status=404)
 
-        booking = Booking.objects.create(user=user, tour=tour)
-        return Response({'Booking created. Booking_id': booking.id, 'tour_id': tour.id})
+        booking = Booking.objects.create(
+            user=request.user,
+            tour=tour
+        )
 
-    def get(self, request):
-        if request.user.is_superuser or request.user.is_staff:
-            bookings = Booking.objects.all()
-            serializer = BookingSerializer(bookings, many=True)
-            return Response(serializer.data)
-        else:
-            user = request.user
-            bookings = Booking.objects.filter(user=user)
-            serializer = BookingSerializer(bookings, many=True)
-            return Response(serializer.data)
+        serializer = BookingSerializer(booking)
+        return Response(serializer.data, status=201)
 
 
 
