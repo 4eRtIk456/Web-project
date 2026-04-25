@@ -5,6 +5,12 @@ from .fbv import tours, tour_detail, search_tours
 from .generics import RegisterView
 from .auth_views import login_view
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from django.contrib import admin
+from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
+
+
 urlpatterns = [
     # FBV (Tour)
     path('tours/', tours),
@@ -28,5 +34,6 @@ urlpatterns = [
     path('tours/search/', search_tours),
 
 
-
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

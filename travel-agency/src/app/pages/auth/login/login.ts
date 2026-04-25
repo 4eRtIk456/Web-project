@@ -39,18 +39,10 @@ export class LoginComponent {
       password: this.password
     }).subscribe({
       next: (res: any) => {
-
         this.loading = false;
 
         this.auth.saveToken(res.access, this.remember);
-
         this.auth.saveUser(res.user || { email: this.email });
-
-        if (this.remember) {
-          localStorage.setItem('token', res.access);
-        } else {
-          sessionStorage.setItem('token', res.access);
-        }
 
         const returnUrl =
           this.route.snapshot.queryParams['returnUrl'] || '/';

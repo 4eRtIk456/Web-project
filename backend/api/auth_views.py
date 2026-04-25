@@ -12,6 +12,9 @@ def login_view(request):
     email = request.data.get('email')
     password = request.data.get('password')
 
+    if not email or not password:
+        return Response({'error': 'Email and password required'}, status=400)
+
     user_obj = User.objects.filter(email=email).first()
 
     if not user_obj:
@@ -26,5 +29,10 @@ def login_view(request):
 
     return Response({
         'access': str(refresh.access_token),
-        'refresh': str(refresh)
+        'refresh': str(refresh),
+        'user': {
+            'id': user.id,
+            'username': user.username,
+            'email': user.email
+        }
     })

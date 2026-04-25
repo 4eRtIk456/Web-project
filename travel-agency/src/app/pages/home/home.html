@@ -65,49 +65,7 @@
   </div>
 </section>
 
-<section class="destinations">
 
-  <h2>Popular Destinations</h2>
-  <p class="subtitle">
-    Discover amazing places around the world with our curated travel packages
-  </p>
-
-  <div class="cards">
-
-    @for (tour of tours; track tour.id) {
-
-      <div class="card">
-
-        <!-- IMAGE -->
-        <div class="image">
-          <img [src]="tour.photo" alt="">
-          <div class="overlay-title">
-            {{ tour.country }}
-          </div>
-        </div>
-
-        <!-- CONTENT -->
-        <div class="content">
-          <p class="desc">
-            {{ getShortDescription(tour.description) }}
-          </p>
-
-          <div class="bottom">
-            <span class="price">from ${{ tour.price }}</span>
-
-            <a [routerLink]="['/tour', tour.id]" class="details">
-              View details →
-            </a>
-          </div>
-        </div>
-
-      </div>
-
-    }
-
-  </div>
-
-</section>
 
 <section id="about" class="why">
 
@@ -168,9 +126,7 @@
   <!-- HEADER -->
   <div class="offers-header">
 
-    <div class="badge">
-      🔖 Hot Deals
-    </div>
+    <div class="badge">🔥 Hot Deals</div>
 
     <h2>Special Offers</h2>
 
@@ -180,54 +136,60 @@
 
   </div>
 
+  <!-- LOADING -->
+  @if (loading) {
+    <p style="text-align:center; margin-top:20px;">Loading...</p>
+  }
+
   <!-- CARDS -->
-  <div class="offers-grid">
+  @if (!loading && tours.length > 0) {
 
-    @for (offer of offers; track offer.id) {
+    <div class="offers-grid">
 
-      <div class="offer-card">
+      @for (tour of tours; track tour.id) {
 
-        <!-- IMAGE -->
-        <div class="offer-image">
-          <img [src]="offer.image" [alt]="offer.title">
+        <div class="offer-card">
 
-          <div class="discount">
-            {{ offer.discount }}
-          </div>
-        </div>
-
-        <!-- CONTENT -->
-        <div class="offer-content">
-
-          <h3>{{ offer.title }}</h3>
-
-          <p class="destination">{{ offer.destination }}</p>
-
-          <div class="days">
-            ⏱ {{ offer.days }}
+          <!-- IMAGE -->
+          <div class="offer-image">
+            <img [src]="'http://localhost:8000' + tour.photo" alt="">
           </div>
 
-          <div class="bottom">
+          <!-- CONTENT -->
+          <div class="offer-content">
 
-            <div class="price">
-              <span class="old">${{ offer.originalPrice }}</span>
-              <span class="new">${{ offer.salePrice }}</span>
+            <h3>{{ tour.title }}</h3>
+
+            <p class="destination">
+              📍 {{ tour.country }}
+            </p>
+
+            <div class="days">
+              ⏱ {{ tour.duration }} days
             </div>
 
-            <button class="book-btn"
-                    [routerLink]="['/tour', offer.id]">
-              Book Now
-            </button>
+            <div class="bottom">
+
+              <div class="price">
+                <span class="new">${{ tour.price }}</span>
+              </div>
+
+              <button class="book-btn"
+                      [routerLink]="['/tour', tour.id]">
+                View →
+              </button>
+
+            </div>
 
           </div>
 
         </div>
 
-      </div>
+      }
 
-    }
+    </div>
 
-  </div>
+  }
 
 </section>
 

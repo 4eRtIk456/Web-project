@@ -16,22 +16,11 @@ export class ProfileComponent {
     email: ''
   };
 
-  bookings = [
-    {
-      title: 'Dubai Luxury',
-      date: '2026-06-10',
-      status: 'Confirmed'
-    },
-    {
-      title: 'Istanbul Explorer',
-      date: '2026-07-05',
-      status: 'Pending'
-    }
-  ];
+  bookings: any[] = [];
 
   constructor(private auth: AuthService) {
     this.user.username = this.auth.getUsername();
-    this.user.email = 'example@email.com'; 
+    this.user.email = this.auth.getEmail();
   }
 
   getInitial() {

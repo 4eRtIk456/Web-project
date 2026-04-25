@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { ApiService } from '../../core/services/api.service'; 
 import { LucideAngularModule } from 'lucide-angular';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   standalone: true,
@@ -21,45 +22,6 @@ export class HomeComponent implements OnInit {
 
   tours: any[] = [];
 
-  destinations = [
-    { name: 'Turkey', price: 899, image: 'assets/turkey.jpg', desc: 'Istanbul & Cappadocia' },
-    { name: 'UAE', price: 1299, image: 'assets/uae.jpg', desc: 'Dubai luxury' },
-    { name: 'Thailand', price: 1099, image: 'assets/thailand.jpg', desc: 'Tropical paradise' },
-    { name: 'Europe', price: 1599, image: 'assets/europe.jpg', desc: 'Historic cities' }
-  ];
-
-  offers = [
-  {
-    id: 1,
-    image: 'https://images.unsplash.com/photo-1662653554950-13870f8473fd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwyfHxFdXJvcGUlMjBQYXJpcyUyMEVpZmZlbCUyMFRvd2VyfGVufDF8fHx8MTc3NjQ5NDAyMXww&ixlib=rb-4.1.0&q=80&w=1080',
-    title: 'Paris Getaway',
-    destination: 'France, Europe',
-    days: '7 days / 6 nights',
-    originalPrice: 1999,
-    salePrice: 1599,
-    discount: '-20%',
-  },
-  {
-    id: 2,
-    image: 'https://images.unsplash.com/photo-1715109862630-9d8c83591d5f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwyfHxEdWJhaSUyMFVBRSUyMHNreWxpbmV8ZW58MXx8fHwxNzc2NDk0MDIwfDA&ixlib=rb-4.1.0&q=80&w=1080',
-    title: 'Dubai Luxury',
-    destination: 'UAE, Middle East',
-    days: '5 days / 4 nights',
-    originalPrice: 1499,
-    salePrice: 1199,
-    discount: '-20%',
-  },
-  {
-    id: 3,
-    image: 'https://images.unsplash.com/photo-1659698867162-b6dc18792802?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxUdXJrZXklMjBJc3RhbmJ1bCUyMGFyY2hpdGVjdHVyZXxlbnwxfHx8fDE3NzY0OTQwMjB8MA&ixlib=rb-4.1.0&q=80&w=1080',
-    title: 'Istanbul Explorer',
-    destination: 'Turkey',
-    days: '6 days / 5 nights',
-    originalPrice: 1199,
-    salePrice: 899,
-    discount: '-25%',
-  }
-];
 
   features = [
     {
@@ -107,24 +69,24 @@ export class HomeComponent implements OnInit {
 
 testimonials = [
   {
-    name: 'Айгерим Нұрланқызы',
+    name: 'Aigerim Lavamerka',
     location: 'Almaty, Kazakhstan',
     rating: 5,
     text: 'Pack&Go made our family trip to Turkey absolutely amazing! Everything was organized perfectly, from flights to hotels. Highly recommend!',
     avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Aigerim',
   },
   {
-    name: 'Дмитрий Петров',
+    name: 'Alinur Yasha',
     location: 'Astana, Kazakhstan',
-    rating: 5,
-    text: 'Best travel agency in Kazakhstan! Booked a Dubai package and it exceeded all expectations. Professional service and great prices.',
+    rating: 2,
+    text: "The service is complete garbage, I called the number and the operator Alina picked up, I told her that I wanted a vacation like in 1973 when I was young, and she said, <<Can I have more information?>> Listen, I'm going to attack you, you're crazy, threatening people over the phone",
     avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Dmitry',
   },
   {
-    name: 'Гүлнар Сериккызы',
+    name: 'Sabina the Goddess',
     location: 'Shymkent, Kazakhstan',
-    rating: 5,
-    text: 'Had an incredible time in Thailand thanks to Pack&Go. The customer support was available 24/7 and helped us with everything we needed.',
+    rating: 1,
+    text: 'I booked and PAID for a Dubai tour, expecting BUSINESS CLASS and good hotels. Day X comes — at the airport we’re put in ECONOMY (even though BUSINESS was promised). I let it slide. We arrive in Dubai, go to the hotel — it’s TERRIBLE, smells awful, like a dump. Thought the next hotel would be better — NO, all the same cheap 1-star places. My husbands were shocked. I complained, and they tried to SILENCE me with money so I wouldn’t write this review. BUT I WON’T STAY QUIET. DO NOT RECOMMEND. BOYCOTT.',
     avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Gulnar',
   }
 ];
@@ -138,11 +100,23 @@ getStars(count: number) {
 
   constructor(
     private router: Router,
-    private api: ApiService
+    private api: ApiService,
+    private cdr: ChangeDetectorRef
   ) {}
 
-  ngOnInit() {
-    this.loadTours();
+  loading = true;
+
+  ngOnInit(): void {
+    this.api.get('tours/').subscribe({
+      next: (data: any) => {
+        this.tours = data.slice(0, 3); 
+        this.loading = false;
+      },
+      error: (err) => {
+        console.error('Error loading tours:', err);
+        this.loading = false;
+      }
+    });
   }
 
   search() {

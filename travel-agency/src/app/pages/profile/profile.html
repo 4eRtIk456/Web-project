@@ -37,16 +37,18 @@
 
     <div class="booking-card" *ngFor="let b of bookings">
 
+      <img [src]="b.tour_image" alt="tour" class="booking-img">
+
       <div class="left">
-        <h4>{{ b.title }}</h4>
+        <h4>{{ b.tour_title }}</h4>
         <p>{{ b.date }}</p>
+        <span class="price">${{ b.tour_price }}</span>
       </div>
 
-      <div class="right" [class.confirmed]="b.status === 'Confirmed'">
+      <div class="right" [class.confirmed]="b.status === 'confirmed'">
         {{ b.status }}
       </div>
 
     </div>
   </div>
 
-</div>

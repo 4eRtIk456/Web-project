@@ -7,9 +7,21 @@ class TourSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class BookingSerializer(serializers.ModelSerializer):
+    tour_title = serializers.CharField(source='tour.title', read_only=True)
+    tour_price = serializers.IntegerField(source='tour.price', read_only=True)
+    tour_image = serializers.ImageField(source='tour.photo', read_only=True)
+
     class Meta:
         model = Booking
-        fields = '__all__'
+        fields = [
+            'id',
+            'tour',
+            'tour_title',
+            'tour_price',
+            'tour_image',
+            'date',
+            'status'
+        ]
 
 class ReviewSerializer(serializers.Serializer):
     user_id = serializers.IntegerField()
@@ -25,14 +37,7 @@ class UserProfileSerializer(serializers.Serializer):
 class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'username', 'password']
-        extra_kwargs = {
-            'password': {'write_only': True}
-        }
+        fields = ['username', 'password']
 
     def create(self, validated_data):
-        user = User.objects.create_user(
-            username=validated_data['username'],
-            password=validated_data['password']
-        )
-        return user
+        return User.objects.create_user(**validated_data)

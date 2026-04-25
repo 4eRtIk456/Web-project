@@ -1,16 +1,18 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ApiService } from './api.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class BookingService {
 
-  private api = 'http://127.0.0.1:8000/api/';
+  constructor(private api: ApiService) {}
 
-  constructor(private http: HttpClient) {}
+  createBooking(tourId: number) {
+    return this.api.post('bookings/', {
+      tour: tourId
+    });
+  }
 
   getMyBookings() {
-    return this.http.get<any[]>(this.api + 'bookings/');
+    return this.api.get('bookings/');
   }
 }
