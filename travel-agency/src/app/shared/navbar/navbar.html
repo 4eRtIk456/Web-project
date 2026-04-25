@@ -6,7 +6,7 @@
     <span>Pack&Go</span>
   </div>
 
-  <!-- DESKTOP LINKS -->
+  <!-- LINKS -->
   <div class="nav-links desktop">
     <a href="#top">Home</a>
     <a routerLink="/tours">Tours</a>
@@ -16,13 +16,42 @@
 
   <!-- AUTH -->
   <div class="auth desktop">
-    <a routerLink="/login" class="signin">
-      ➜ Sign In
-    </a>
-    <a routerLink="/register" class="register">
-      👤 Register
-    </a>
-  </div>
+    @if (auth.isLoggedIn()) {
+
+      <div class="user-menu">
+
+        <div class="user-btn" (click)="toggleDropdown()">
+
+          <div class="avatar">
+            {{ auth.getUserInitial() }}
+          </div>
+
+          <span class="username">
+            {{ auth.getUsername() }}
+          </span>
+
+        </div>
+
+        @if (isDropdownOpen) {
+          <div class="dropdown">
+            <a routerLink="/profile" (click)="isDropdownOpen = false">
+              Profile
+            </a>
+            <button (click)="logout()">Logout</button>
+          </div>
+        }
+
+      </div>
+
+    } @else {
+      <a routerLink="/login" class="signin">
+        ➜ Sign In
+      </a>
+      <a routerLink="/register" class="register">
+        👤 Register
+      </a>
+    }
+  </div> <!-- ✅ ВОТ ЭТОГО НЕ ХВАТАЛО -->
 
   <!-- 🍔 BURGER -->
   <div class="burger" (click)="toggleMenu()">
@@ -31,13 +60,13 @@
 
 </nav>
 
-<!-- MOBILE MENU -->
-<div class="mobile-menu" [class.open]="isOpen">
+<!-- MOBILE MENU (вынеси ВНЕ navbar) -->
+<div class="mobile-menu" [class.open]="isMenuOpen">
 
   <a routerLink="/" (click)="closeMenu()">Home</a>
   <a routerLink="/tours" (click)="closeMenu()">Tours</a>
-  <a routerLink="/about" (click)="closeMenu()">About</a>
-  <a routerLink="/contact" (click)="closeMenu()">Contact</a>
+  <a href="#about" (click)="closeMenu()">About</a>
+  <a href="#contact" (click)="closeMenu()">Contact</a>
 
   <hr>
 
@@ -46,6 +75,6 @@
 
 </div>
 
-@if (isOpen) {
+@if (isMenuOpen) {
   <div class="overlay" (click)="closeMenu()"></div>
 }

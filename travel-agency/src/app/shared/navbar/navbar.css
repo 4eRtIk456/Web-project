@@ -157,6 +157,128 @@
   z-index: 1000;
 }
 
+.user-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #e6f5f5;
+  padding: 6px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  color: #007073;
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+.user-btn:hover {
+  background: #d1f0f0;
+}
+
+/* 🔥 AVATAR */
+.avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #00a0a4, #007073);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* username */
+.username {
+  font-size: 14px;
+}
+
+.user-menu {
+  position: relative;
+}
+
+.dropdown {
+  position: absolute;
+  overflow: hidden;
+  right: 0;
+  top: 45px;
+
+  min-width: 160px;
+  background: white;
+  border-radius: 12px;
+
+  padding: 6px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+
+  z-index: 2000;
+
+  opacity: 0;
+  transform: translateY(-5px) scale(0.98);
+  animation: dropdownShow 0.2s ease forwards;
+}
+
+.dropdown a,
+.dropdown button {
+  display: block;
+  width: 100%;
+
+  padding: 10px 12px;
+  border-radius: 8px;
+
+  text-align: left;
+  font-size: 14px;
+
+  border: none;
+  background: none;
+  cursor: pointer;
+
+  color: #1f2937;
+  text-decoration: none;
+
+  transition: 0.2s;
+}
+
+/* hover */
+.dropdown a:hover,
+.dropdown button:hover {
+  background: #f1f5f9;
+}
+
+/* logout цвет */
+.dropdown button {
+  color: #dc2626;
+}
+
+/* разделение визуальное (без div) */
+.dropdown button {
+  margin-top: 4px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.dropdown::before {
+  content: "";
+  position: absolute;
+  top: -6px;
+  right: 15px;
+
+  width: 10px;
+  height: 10px;
+
+  background: white;
+  transform: rotate(45deg);
+
+  box-shadow: -2px -2px 5px rgba(0,0,0,0.03);
+}
+
+@keyframes dropdownShow {
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
 /* 📱 RESPONSIVE */
 @media (max-width: 900px) {
 
