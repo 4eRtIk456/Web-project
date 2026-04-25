@@ -13,15 +13,7 @@ class BookingSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Booking
-        fields = [
-            'id',
-            'tour',
-            'tour_title',
-            'tour_price',
-            'tour_image',
-            'date',
-            'status'
-        ]
+        fields = '__all__'
 
 class ReviewSerializer(serializers.Serializer):
     user_id = serializers.IntegerField()

@@ -8,7 +8,7 @@
 
 @if (!loading && tour) {
   <div class="hero"
-     [style.backgroundImage]="'url(http://localhost:8000' + tour.photo + ')'">  
+     [style.backgroundImage]="'url(' + (tour.photo_url || ('http://localhost:8000' + tour.photo)) + ')'">
     <div class="overlay">
 
       <a routerLink="/" class="back">← Back to Home</a>

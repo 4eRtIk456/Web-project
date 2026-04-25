@@ -8,6 +8,7 @@ class Tour(models.Model):
     city = models.CharField(max_length=200)
     date = models.DateField()
     photo = models.ImageField(upload_to='tours/')
+    photo_url = models.URLField(blank=True, null=True)
     duration = models.IntegerField()
     max_people = models.IntegerField(default=5)
     available_dates = models.JSONField(default=list) 
